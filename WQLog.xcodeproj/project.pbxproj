@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		841750161D6EBAB700D4AE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 841750151D6EBAB700D4AE69 /* main.m */; };
+		841750191D6EBAB700D4AE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 841750181D6EBAB700D4AE69 /* AppDelegate.m */; };
+		8417501C1D6EBAB700D4AE69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417501B1D6EBAB700D4AE69 /* ViewController.m */; };
+		8417501F1D6EBAB700D4AE69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8417501D1D6EBAB700D4AE69 /* Main.storyboard */; };
+		841750211D6EBAB700D4AE69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841750201D6EBAB700D4AE69 /* Assets.xcassets */; };
+		841750241D6EBAB700D4AE69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841750221D6EBAB700D4AE69 /* LaunchScreen.storyboard */; };
+		8417502F1D6EBAB700D4AE69 /* WQLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8417502E1D6EBAB700D4AE69 /* WQLogTests.m */; };
+		8417503A1D6EBAB700D4AE69 /* WQLogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 841750391D6EBAB700D4AE69 /* WQLogUITests.m */; };
+		8417504A1D6EDE9D00D4AE69 /* WQLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 841750491D6EDE9D00D4AE69 /* WQLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8417502B1D6EBAB700D4AE69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 841750091D6EBAB700D4AE69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841750101D6EBAB700D4AE69;
+			remoteInfo = WQLog;
+		};
+		841750361D6EBAB700D4AE69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 841750091D6EBAB700D4AE69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 841750101D6EBAB700D4AE69;
+			remoteInfo = WQLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		841750111D6EBAB700D4AE69 /* WQLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WQLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		841750151D6EBAB700D4AE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		841750171D6EBAB700D4AE69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		841750181D6EBAB700D4AE69 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8417501A1D6EBAB700D4AE69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8417501B1D6EBAB700D4AE69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8417501E1D6EBAB700D4AE69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		841750201D6EBAB700D4AE69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		841750231D6EBAB700D4AE69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		841750251D6EBAB700D4AE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8417502A1D6EBAB700D4AE69 /* WQLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WQLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8417502E1D6EBAB700D4AE69 /* WQLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WQLogTests.m; sourceTree = "<group>"; };
+		841750301D6EBAB700D4AE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		841750351D6EBAB700D4AE69 /* WQLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WQLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		841750391D6EBAB700D4AE69 /* WQLogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WQLogUITests.m; sourceTree = "<group>"; };
+		8417503B1D6EBAB700D4AE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		841750481D6EBAF900D4AE69 /* WQLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WQLog.h; sourceTree = "<group>"; };
+		841750491D6EDE9D00D4AE69 /* WQLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQLog.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8417500E1D6EBAB700D4AE69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750271D6EBAB700D4AE69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750321D6EBAB700D4AE69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		841750081D6EBAB700D4AE69 = {
+			isa = PBXGroup;
+			children = (
+				841750131D6EBAB700D4AE69 /* WQLog */,
+				8417502D1D6EBAB700D4AE69 /* WQLogTests */,
+				841750381D6EBAB700D4AE69 /* WQLogUITests */,
+				841750121D6EBAB700D4AE69 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		841750121D6EBAB700D4AE69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				841750111D6EBAB700D4AE69 /* WQLog.app */,
+				8417502A1D6EBAB700D4AE69 /* WQLogTests.xctest */,
+				841750351D6EBAB700D4AE69 /* WQLogUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		841750131D6EBAB700D4AE69 /* WQLog */ = {
+			isa = PBXGroup;
+			children = (
+				841750471D6EBACF00D4AE69 /* WQLog */,
+				841750171D6EBAB700D4AE69 /* AppDelegate.h */,
+				841750181D6EBAB700D4AE69 /* AppDelegate.m */,
+				8417501A1D6EBAB700D4AE69 /* ViewController.h */,
+				8417501B1D6EBAB700D4AE69 /* ViewController.m */,
+				8417501D1D6EBAB700D4AE69 /* Main.storyboard */,
+				841750201D6EBAB700D4AE69 /* Assets.xcassets */,
+				841750221D6EBAB700D4AE69 /* LaunchScreen.storyboard */,
+				841750251D6EBAB700D4AE69 /* Info.plist */,
+				841750141D6EBAB700D4AE69 /* Supporting Files */,
+			);
+			path = WQLog;
+			sourceTree = "<group>";
+		};
+		841750141D6EBAB700D4AE69 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				841750151D6EBAB700D4AE69 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8417502D1D6EBAB700D4AE69 /* WQLogTests */ = {
+			isa = PBXGroup;
+			children = (
+				8417502E1D6EBAB700D4AE69 /* WQLogTests.m */,
+				841750301D6EBAB700D4AE69 /* Info.plist */,
+			);
+			path = WQLogTests;
+			sourceTree = "<group>";
+		};
+		841750381D6EBAB700D4AE69 /* WQLogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				841750391D6EBAB700D4AE69 /* WQLogUITests.m */,
+				8417503B1D6EBAB700D4AE69 /* Info.plist */,
+			);
+			path = WQLogUITests;
+			sourceTree = "<group>";
+		};
+		841750471D6EBACF00D4AE69 /* WQLog */ = {
+			isa = PBXGroup;
+			children = (
+				841750481D6EBAF900D4AE69 /* WQLog.h */,
+				841750491D6EDE9D00D4AE69 /* WQLog.m */,
+			);
+			path = WQLog;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		841750101D6EBAB700D4AE69 /* WQLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8417503E1D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLog" */;
+			buildPhases = (
+				8417500D1D6EBAB700D4AE69 /* Sources */,
+				8417500E1D6EBAB700D4AE69 /* Frameworks */,
+				8417500F1D6EBAB700D4AE69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WQLog;
+			productName = WQLog;
+			productReference = 841750111D6EBAB700D4AE69 /* WQLog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		841750291D6EBAB700D4AE69 /* WQLogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841750411D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLogTests" */;
+			buildPhases = (
+				841750261D6EBAB700D4AE69 /* Sources */,
+				841750271D6EBAB700D4AE69 /* Frameworks */,
+				841750281D6EBAB700D4AE69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8417502C1D6EBAB700D4AE69 /* PBXTargetDependency */,
+			);
+			name = WQLogTests;
+			productName = WQLogTests;
+			productReference = 8417502A1D6EBAB700D4AE69 /* WQLogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		841750341D6EBAB700D4AE69 /* WQLogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 841750441D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLogUITests" */;
+			buildPhases = (
+				841750311D6EBAB700D4AE69 /* Sources */,
+				841750321D6EBAB700D4AE69 /* Frameworks */,
+				841750331D6EBAB700D4AE69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				841750371D6EBAB700D4AE69 /* PBXTargetDependency */,
+			);
+			name = WQLogUITests;
+			productName = WQLogUITests;
+			productReference = 841750351D6EBAB700D4AE69 /* WQLogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		841750091D6EBAB700D4AE69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = jolimark;
+				TargetAttributes = {
+					841750101D6EBAB700D4AE69 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					841750291D6EBAB700D4AE69 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 841750101D6EBAB700D4AE69;
+					};
+					841750341D6EBAB700D4AE69 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 841750101D6EBAB700D4AE69;
+					};
+				};
+			};
+			buildConfigurationList = 8417500C1D6EBAB700D4AE69 /* Build configuration list for PBXProject "WQLog" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 841750081D6EBAB700D4AE69;
+			productRefGroup = 841750121D6EBAB700D4AE69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				841750101D6EBAB700D4AE69 /* WQLog */,
+				841750291D6EBAB700D4AE69 /* WQLogTests */,
+				841750341D6EBAB700D4AE69 /* WQLogUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8417500F1D6EBAB700D4AE69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				841750241D6EBAB700D4AE69 /* LaunchScreen.storyboard in Resources */,
+				841750211D6EBAB700D4AE69 /* Assets.xcassets in Resources */,
+				8417501F1D6EBAB700D4AE69 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750281D6EBAB700D4AE69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750331D6EBAB700D4AE69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8417500D1D6EBAB700D4AE69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8417504A1D6EDE9D00D4AE69 /* WQLog.m in Sources */,
+				8417501C1D6EBAB700D4AE69 /* ViewController.m in Sources */,
+				841750191D6EBAB700D4AE69 /* AppDelegate.m in Sources */,
+				841750161D6EBAB700D4AE69 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750261D6EBAB700D4AE69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8417502F1D6EBAB700D4AE69 /* WQLogTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841750311D6EBAB700D4AE69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8417503A1D6EBAB700D4AE69 /* WQLogUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8417502C1D6EBAB700D4AE69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841750101D6EBAB700D4AE69 /* WQLog */;
+			targetProxy = 8417502B1D6EBAB700D4AE69 /* PBXContainerItemProxy */;
+		};
+		841750371D6EBAB700D4AE69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 841750101D6EBAB700D4AE69 /* WQLog */;
+			targetProxy = 841750361D6EBAB700D4AE69 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8417501D1D6EBAB700D4AE69 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8417501E1D6EBAB700D4AE69 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		841750221D6EBAB700D4AE69 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				841750231D6EBAB700D4AE69 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8417503C1D6EBAB700D4AE69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8417503D1D6EBAB700D4AE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8417503F1D6EBAB700D4AE69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WQLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		841750401D6EBAB700D4AE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WQLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		841750421D6EBAB700D4AE69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WQLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WQLog.app/WQLog";
+			};
+			name = Debug;
+		};
+		841750431D6EBAB700D4AE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WQLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WQLog.app/WQLog";
+			};
+			name = Release;
+		};
+		841750451D6EBAB700D4AE69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WQLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WQLog;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		841750461D6EBAB700D4AE69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WQLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jolimark.www.WQLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WQLog;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8417500C1D6EBAB700D4AE69 /* Build configuration list for PBXProject "WQLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8417503C1D6EBAB700D4AE69 /* Debug */,
+				8417503D1D6EBAB700D4AE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8417503E1D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8417503F1D6EBAB700D4AE69 /* Debug */,
+				841750401D6EBAB700D4AE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		841750411D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841750421D6EBAB700D4AE69 /* Debug */,
+				841750431D6EBAB700D4AE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		841750441D6EBAB700D4AE69 /* Build configuration list for PBXNativeTarget "WQLogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841750451D6EBAB700D4AE69 /* Debug */,
+				841750461D6EBAB700D4AE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 841750091D6EBAB700D4AE69 /* Project object */;
+}
