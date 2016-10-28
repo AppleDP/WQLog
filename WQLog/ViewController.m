@@ -17,12 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WQLog(@"Log");
-    [self fun];
-}
-
-- (void)fun{
-    WQLog(@"SELF");
+    WQLog(@"log");
+    WQLogWarn(@"Log");
+    WQLogError(@"Log");
+    WQLogInfo(@"Log");
+    printf("Hello");
+    UIColor *color = [UIColor colorWithRed:0.5 green:0.1 blue:0.2 alpha:1.0];
 }
 
 @end

@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    WQLog(@"%@",NSHomeDirectory());
+//    WQLogInfo(@"%@",NSHomeDirectory());
 #if TARGET_IPHONE_SIMULATOR
     
 #elif TARGET_IOS_IPHONE
