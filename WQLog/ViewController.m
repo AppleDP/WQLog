@@ -18,11 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WQLog(@"log");
-    WQLogWarn(@"Log");
-    WQLogError(@"Log");
     WQLogInfo(@"Log");
-    printf("Hello");
-    UIColor *color = [UIColor colorWithRed:0.5 green:0.1 blue:0.2 alpha:1.0];
+    WQLogError(@"Log");
+    WQLogWarn(@"Log");
+    WQLogMsg(@"Log");
 }
 
 @end
