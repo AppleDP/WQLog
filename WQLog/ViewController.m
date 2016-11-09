@@ -18,10 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WQLog(@"log");
-    WQLogInfo(@"Log");
-    WQLogError(@"Log");
-    WQLogWarn(@"Log");
-    WQLogMsg(@"Log");
+    WQLogInfo(@"Info    Log");
+    WQLogError(@"Error   Log");
+    WQLogWarn(@"Warn    Log");
+    WQLogMsg(@"Mssage  Log");
 }
 
 @end
