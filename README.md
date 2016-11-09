@@ -1,5 +1,6 @@
 # WQLog
 Console Log
+<img src="https://github.com/AppleDP/WQLog/blob/master/Effect/Effect.png" alt="Console Log" title="Console Log">
 # Install 
 ```objective-c
 pod 'WQLog', '~> 1.0.0'
