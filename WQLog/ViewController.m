@@ -18,10 +18,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     WQLog(@"log");
-    WQLogInfo(@"Info    Log");
-    WQLogError(@"Error   Log");
-    WQLogWarn(@"Warn    Log");
-    WQLogMsg(@"Mssage  Log");
+    WQLogInfo(@"Info Log");
+    WQLogError(@"Error Log");
+    WQLogWarn(@"Warn Log");
+    WQLogMsg(@"Mssage Log");
+    
+    NSThread *thread = [[NSThread alloc] initWithTarget:self
+                                               selector:@selector(childThread)
+                                                 object:nil];
+    thread.name = @"WQLogThread";
+    [thread start];
+}
+
+- (void)childThread {
+    WQLog(@"log");
+    WQLogInfo(@"Info Log");
+    WQLogError(@"Error Log");
+    WQLogWarn(@"Warn Log");
+    WQLogMsg(@"Mssage Log");
 }
 
 @end

@@ -22,7 +22,8 @@
 #if TARGET_IPHONE_SIMULATOR
     
 #elif TARGET_IOS_IPHONE
-    [WQLogRecode recodeLog];
+    // 日志记录
+    [Log recodeLog];
 #endif
     
     return YES;
