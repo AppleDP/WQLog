@@ -6,23 +6,64 @@
 //  Copyright © 2016年 jolimark. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-//#define WQLog(FORMAT,...) fprintf(stderr,">> >> >> 文件: %s : 行号: %d --- 日志: %s << << <<\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__,[[NSString stringWithFormat:FORMAT,##__VA_ARGS__] UTF8String])
+#import <UIKit/UIKit.h>
 
 #define XCODE_COLORS_ESCAPE @"\033[" 
 #define XCODE_COLORS_RESET_FG XCODE_COLORS_ESCAPE @"fg;"
 
-#define WQLog(FORMAT,...) NSLog(@">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<",[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name),[NSString stringWithFormat:FORMAT,##__VA_ARGS__])
-
 /*********************************** 安 装 了 XcodeColors 后 可 以 输 出 带 颜 色 的 日 志 ***********************************/
-#define WQLogInfo(FORMAT,...) NSLog((XCODE_COLORS_ESCAPE @"fg32,102,235;" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"XCODE_COLORS_RESET_FG),[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name),[NSString stringWithFormat:FORMAT,##__VA_ARGS__])
-#define WQLogError(FORMAT,...) NSLog((XCODE_COLORS_ESCAPE @"fg255,0,0;" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"XCODE_COLORS_RESET_FG),[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name),[NSString stringWithFormat:FORMAT,##__VA_ARGS__])
-#define WQLogWarn(FORMAT,...) NSLog((XCODE_COLORS_ESCAPE @"fg213,184,109;" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"XCODE_COLORS_RESET_FG),[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name),[NSString stringWithFormat:FORMAT,##__VA_ARGS__])
-#define WQLogMsg(FORMAT,...) NSLog((XCODE_COLORS_ESCAPE @"fg127,255,0;" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"XCODE_COLORS_RESET_FG),[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name),[NSString stringWithFormat:FORMAT,##__VA_ARGS__])
+#define WQLogDefault(FORMAT,...) WQLoger(nil,(FORMAT), ## __VA_ARGS__)
+#define WQLogInfo(FORMAT,...)    WQLoger(WQColor(32,102,235,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogError(FORMAT,...)   WQLoger(WQColor(255,0,0,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogWarn(FORMAT,...)    WQLoger(WQColor(213,184,109,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogMsg(FORMAT,...)     WQLoger(WQColor(127,255,0,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogOther(FORMAT,...)   WQLoger(WQColor(186,0,255,1),(FORMAT), ## __VA_ARGS__)
+#define WQLoger(COLOR,FORMAT,...)   \
+    [WQLog log:COLOR    \
+          file:[[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
+          line:__LINE__   \
+        thread:[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name) \
+          log:(FORMAT), ## __VA_ARGS__]
 
-@interface Log : NSObject
+/** 自定义颜色日志输出 */
+#define WQCustomLog(FORMAT,...) \
+    [WQLog cusLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent]    \
+             line:__LINE__    \
+           thread:[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name)  \
+              log:(FORMAT), ## __VA_ARGS__]
+
+#define WQColor(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+@interface WQLog : NSObject
+/**
+ *  将日志输出到本地
+ */
 + (void)recodeLog;
+/**
+ *  清除本地日志
+ */
 + (void)clearRecode;
+/**
+ *  自定义日志颜色
+ *
+ *  @param color 日志颜色
+ */
++ (void)setCustomColor:(UIColor *)color;
+
+
+
+
+
+/*********************************** 内 部 调 用 ***********************************/
++ (void)log:(UIColor *)color
+       file:(NSString *)file
+       line:(int)line
+     thread:(NSString *)thread
+        log:(NSString *)log,...;
++ (void)cusLog:(NSString *)file
+          line:(int)line
+        thread:(NSString *)thread
+           log:(NSString *)log,...;
 @end
 
 
