@@ -6,7 +6,7 @@
 //  Copyright © 2016年 jolimark. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIColor.h>
 
 #define XCODE_COLORS_ESCAPE @"\033[" 
 #define XCODE_COLORS_RESET_FG XCODE_COLORS_ESCAPE @"fg;"
