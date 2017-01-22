@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WQLogDef(@"log");
+    WQLogDef(@"Default Log");
     WQLogInf(@"Info Log");
     WQLogErr(@"Error Log");
     WQLogWar(@"Warn Log");
@@ -36,7 +36,7 @@
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
-    WQLogDef(@"log");
+    WQLogDef(@"Default Log");
     WQLogInf(@"Info Log");
     WQLogErr(@"Error Log");
     WQLogWar(@"Warn Log");
