@@ -17,13 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WQLogDefault(@"log");
-    WQLogInfo(@"Info Log");
-    WQLogError(@"Error Log");
-    WQLogWarn(@"Warn Log");
-    WQLogMsg(@"Mssage Log");
-    WQLogOther(@"Other Log");
-    WQCustomLog(@"Custom Log");
+    WQLogDef(@"log");
+    WQLogInf(@"Info Log");
+    WQLogErr(@"Error Log");
+    WQLogWar(@"Warn Log");
+    WQLogMes(@"Mssage Log");
+    WQLogOth(@"Other Log");
+    WQLogCus(@"Custom Log");
     
     NSThread *thread = [[NSThread alloc] initWithTarget:self
                                                selector:@selector(childThread)
@@ -36,13 +36,13 @@
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
-    WQLogDefault(@"log");
-    WQLogInfo(@"Info Log");
-    WQLogError(@"Error Log");
-    WQLogWarn(@"Warn Log");
-    WQLogMsg(@"Mssage Log");
-    WQLogOther(@"Other Log");
-    WQCustomLog(@"Custom Log");
+    WQLogDef(@"log");
+    WQLogInf(@"Info Log");
+    WQLogErr(@"Error Log");
+    WQLogWar(@"Warn Log");
+    WQLogMes(@"Mssage Log");
+    WQLogOth(@"Other Log");
+    WQLogCus(@"Custom Log");
 }
 
 @end

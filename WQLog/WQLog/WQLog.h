@@ -12,12 +12,12 @@
 #define XCODE_COLORS_RESET_FG XCODE_COLORS_ESCAPE @"fg;"
 
 /*********************************** 安 装 了 XcodeColors 后 可 以 输 出 带 颜 色 的 日 志 ***********************************/
-#define WQLogDefault(FORMAT,...) WQLoger(nil,(FORMAT), ## __VA_ARGS__)
-#define WQLogInfo(FORMAT,...)    WQLoger(WQColor(32,102,235,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogError(FORMAT,...)   WQLoger(WQColor(255,0,0,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogWarn(FORMAT,...)    WQLoger(WQColor(213,184,109,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogMsg(FORMAT,...)     WQLoger(WQColor(127,255,0,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogOther(FORMAT,...)   WQLoger(WQColor(186,0,255,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogDef(FORMAT,...) WQLoger(nil,(FORMAT), ## __VA_ARGS__)
+#define WQLogInf(FORMAT,...) WQLoger(WQColor(32,102,235,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogErr(FORMAT,...) WQLoger(WQColor(255,0,0,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogWar(FORMAT,...) WQLoger(WQColor(213,184,109,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogMes(FORMAT,...) WQLoger(WQColor(127,255,0,1),(FORMAT), ## __VA_ARGS__)
+#define WQLogOth(FORMAT,...) WQLoger(WQColor(186,0,255,1),(FORMAT), ## __VA_ARGS__)
 #define WQLoger(COLOR,FORMAT,...)   \
     [WQLog log:COLOR    \
           file:[[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
@@ -26,7 +26,7 @@
           log:(FORMAT), ## __VA_ARGS__]
 
 /** 自定义颜色日志输出 */
-#define WQCustomLog(FORMAT,...) \
+#define WQLogCus(FORMAT,...) \
     [WQLog cusLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent]    \
              line:__LINE__    \
            thread:[[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name)  \
