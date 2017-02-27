@@ -13,8 +13,6 @@
 @end
 
 @implementation WQLog
-static WQLog *shareWQLog;
-
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     @synchronized(self) {
         if (shareWQLog == nil) {
@@ -24,6 +22,7 @@ static WQLog *shareWQLog;
     return shareWQLog;
 }
 
+static WQLog *shareWQLog;
 + (WQLog *)shareWQLog {
     @synchronized(self) {
         if (shareWQLog == nil) {
@@ -64,12 +63,6 @@ static WQLog *shareWQLog;
           line:(int)line
         thread:(NSString *)thread
            log:(NSString *)log,... {
-    if (self.wqCustomColor == nil) {
-        self.wqCustomColor = [UIColor colorWithRed:0
-                                        green:0
-                                         blue:0
-                                        alpha:0];
-    }
     [self log:self.wqCustomColor
          file:file
          line:line
