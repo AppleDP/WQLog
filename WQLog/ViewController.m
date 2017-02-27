@@ -28,13 +28,11 @@
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
-    for (int index = 0; index < 100; index ++) {
-        NSThread *thread = [[NSThread alloc] initWithTarget:self
-                                                   selector:@selector(childThread)
-                                                     object:nil];
-        thread.name = @"WQLogThread";
-        [thread start];
-    }
+    NSThread *thread = [[NSThread alloc] initWithTarget:self
+                                               selector:@selector(childThread)
+                                                 object:nil];
+    thread.name = @"WQLogThread";
+    [thread start];
 }
 
 - (void)childThread {
