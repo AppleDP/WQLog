@@ -61,7 +61,7 @@ static WQLog *shareWQLog;
 
 - (void)cusLog:(NSString *)file
           line:(int)line
-        thread:(NSString *)thread
+        thread:(NSThread *)thread
            log:(NSString *)log,... {
     [self log:self.wqCustomColor
          file:file
@@ -73,7 +73,7 @@ static WQLog *shareWQLog;
 - (void)log:(UIColor *)color
        file:(NSString *)file
        line:(int)line
-     thread:(NSString *)thread
+     thread:(NSThread *)thread
         log:(NSString *)log,... {
     @synchronized(self) {
         va_list list;
@@ -85,6 +85,7 @@ static WQLog *shareWQLog;
                 g = components[1]*255;
                 b = components[2]*255;
             }
+            NSString *threadName = [[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name);
             va_start(list, log);
             NSString *msg = [[NSString alloc] initWithFormat:log
                                                    arguments:list];
@@ -96,7 +97,7 @@ static WQLog *shareWQLog;
                   color == nil ? @"" : [NSString stringWithFormat:@"fg%d,%d,%d;",r,g,b],
                   file,
                   line,
-                  thread,
+                  threadName,
                   msg,
                   color == nil ? @"" : XCODE_COLORS_RESET_FG);
         }

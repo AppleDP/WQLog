@@ -24,14 +24,14 @@
     [SINGLETONWQLOG log: COLOR    \
                    file: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
                    line: __LINE__   \
-                 thread: [[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name) \
+                 thread: [NSThread currentThread] \
                     log: (FORMAT), ## __VA_ARGS__]
 
 /** 自定义颜色日志输出 */
 #define WQLogCus(FORMAT,...) \
     [SINGLETONWQLOG cusLog: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]    \
                       line: __LINE__    \
-                    thread: [[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name)  \
+                    thread: [NSThread currentThread]  \
                        log: (FORMAT), ## __VA_ARGS__]
 
 #define WQColor(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -57,11 +57,11 @@
 - (void)log:(UIColor *)color
        file:(NSString *)file
        line:(int)line
-     thread:(NSString *)thread
+     thread:(NSThread *)thread
         log:(NSString *)log,...;
 - (void)cusLog:(NSString *)file
           line:(int)line
-        thread:(NSString *)thread
+        thread:(NSThread *)thread
            log:(NSString *)log,...;
 @end
 
