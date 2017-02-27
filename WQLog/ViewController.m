@@ -25,17 +25,19 @@
     WQLogOth(@"Other Log");
     WQLogCus(@"Custom Log");
     
-    NSThread *thread = [[NSThread alloc] initWithTarget:self
-                                               selector:@selector(childThread)
-                                                 object:nil];
-    thread.name = @"WQLogThread";
-    [thread start];
+    NSLog(@" ");
+    NSLog(@" ");
+    NSLog(@" ");
+    for (int index = 0; index < 100; index ++) {
+        NSThread *thread = [[NSThread alloc] initWithTarget:self
+                                                   selector:@selector(childThread)
+                                                     object:nil];
+        thread.name = @"WQLogThread";
+        [thread start];
+    }
 }
 
 - (void)childThread {
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" ");
     WQLogDef(@"Default Log");
     WQLogInf(@"Info Log");
     WQLogErr(@"Error Log");
@@ -43,6 +45,10 @@
     WQLogMes(@"Mssage Log");
     WQLogOth(@"Other Log");
     WQLogCus(@"Custom Log");
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc");
 }
 
 @end

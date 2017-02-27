@@ -25,7 +25,7 @@
     // 日志记录
     [Log recodeLog];
 #endif
-    [WQLog setCustomColor:WQColor(255, 255, 0, 1)];
+    [SINGLETONWQLOG setWqCustomColor:WQColor(255, 255, 0, 1)];
     return YES;
 }
 

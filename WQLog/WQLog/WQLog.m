@@ -13,12 +13,27 @@
 @end
 
 @implementation WQLog
-static UIColor *WQCustomColor;
-+ (void)setCustomColor:(UIColor *)color {
-    WQCustomColor = color;
+static WQLog *shareWQLog;
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    @synchronized(self) {
+        if (shareWQLog == nil) {
+            shareWQLog = [super allocWithZone:zone];
+        }
+    }
+    return shareWQLog;
 }
 
-+ (void)recodeLog{
++ (WQLog *)shareWQLog {
+    @synchronized(self) {
+        if (shareWQLog == nil) {
+            shareWQLog = [[self alloc] init];
+        }
+    }
+    return shareWQLog;
+}
+
+- (void)recodeLog{
     NSLog(@"******************************************* 开 启 日 志 *******************************************");
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     path = [path stringByAppendingPathComponent:@"WQLog.log"];
@@ -35,7 +50,7 @@ static UIColor *WQCustomColor;
     NSLog(@"********************** 日 志 %@ **********************",timeNow);
 }
 
-+ (void)clearRecode{
+- (void)clearRecode{
     NSLog(@"******************************************* 清 除 日 志 *******************************************");
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     path = [path stringByAppendingPathComponent:@"WQLog.log"];
@@ -45,51 +60,53 @@ static UIColor *WQCustomColor;
 }
 
 
-+ (void)cusLog:(NSString *)file
+- (void)cusLog:(NSString *)file
           line:(int)line
         thread:(NSString *)thread
            log:(NSString *)log,... {
-    if (WQCustomColor == nil) {
-        WQCustomColor = [UIColor colorWithRed:0
+    if (self.wqCustomColor == nil) {
+        self.wqCustomColor = [UIColor colorWithRed:0
                                         green:0
                                          blue:0
                                         alpha:0];
     }
-    [self log:WQCustomColor
+    [self log:self.wqCustomColor
          file:file
          line:line
        thread:thread
           log:log];
 }
 
-+ (void)log:(UIColor *)color
+- (void)log:(UIColor *)color
        file:(NSString *)file
        line:(int)line
      thread:(NSString *)thread
         log:(NSString *)log,... {
-    va_list list;
-    if (log) {
-        int r = 0, g = 0, b = 0;
-        if (color) {
-            const CGFloat *components = CGColorGetComponents(color.CGColor);
-            r = components[0]*255;
-            g = components[1]*255;
-            b = components[2]*255;
+    @synchronized(self) {
+        va_list list;
+        if (log) {
+            int r = 0, g = 0, b = 0;
+            if (color) {
+                const CGFloat *components = CGColorGetComponents(color.CGColor);
+                r = components[0]*255;
+                g = components[1]*255;
+                b = components[2]*255;
+            }
+            va_start(list, log);
+            NSString *msg = [[NSString alloc] initWithFormat:log
+                                                   arguments:list];
+            va_end(list);
+            NSLog((@"%@"
+                   @"%@" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"
+                   @"%@"),
+                  color == nil ? @"" : XCODE_COLORS_ESCAPE,
+                  color == nil ? @"" : [NSString stringWithFormat:@"fg%d,%d,%d;",r,g,b],
+                  file,
+                  line,
+                  thread,
+                  msg,
+                  color == nil ? @"" : XCODE_COLORS_RESET_FG);
         }
-        va_start(list, log);
-        NSString *msg = [[NSString alloc] initWithFormat:log
-                                               arguments:list];
-        va_end(list);
-        NSLog((@"%@"
-               @"%@" @">> >> >> 文件: %@ --- 行号: %d --- 线程: %@ --- 日志: %@ << << <<"
-               @"%@"),
-              color == nil ? @"" : XCODE_COLORS_ESCAPE,
-              color == nil ? @"" : [NSString stringWithFormat:@"fg%d,%d,%d;",r,g,b],
-              file,
-              line,
-              thread,
-              msg,
-              color == nil ? @"" : XCODE_COLORS_RESET_FG);
     }
 }
 @end
