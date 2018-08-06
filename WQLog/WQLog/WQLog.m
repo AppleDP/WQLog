@@ -85,7 +85,8 @@ static WQLog *shareWQLog;
                 g = components[1]*255;
                 b = components[2]*255;
             }
-            NSString *threadName = [[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? @"Child" : [NSThread currentThread].name);
+            NSString *queueName = [NSString stringWithUTF8String:dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL)];
+            NSString *threadName = [[NSThread currentThread] isMainThread] ? @"Main" : ([[NSThread currentThread].name  isEqual: @""] ? (queueName.length != 0 ? queueName : @"Child") : [NSThread currentThread].name);
             va_start(list, log);
             NSString *msg = [[NSString alloc] initWithFormat:log
                                                    arguments:list];
