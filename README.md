@@ -7,12 +7,15 @@ pod 'WQLog', '~> 1.0.0'
 ```
 # Usage
 ```objective-c
-    // 普通日志输出
-    WQLog(@"log");
+    // 自定义日志输出颜色
+    [SINGLETONWQLOG setWqCustomColor:WQColor(255, 255, 0, 1)];
     
     // 带色日志输出（安装了 Xcode Colors 插件）
-    WQLogInfo(@"Log");
-    WQLogError(@"Log");
-    WQLogWarn(@"Log");
-    WQLogMsg(@"Log");
+    WQLogDef(@"Default Log");
+    WQLogInf(@"Info Log");
+    WQLogErr(@"Error Log");
+    WQLogWar(@"Warn Log");
+    WQLogMes(@"Mssage Log");
+    WQLogOth(@"Other Log");
+    WQLogCus(@"Custom Log");
 ```
