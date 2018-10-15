@@ -24,7 +24,6 @@
     WQLogMes(@"Mssage Log");
     WQLogOth(@"Other Log");
     WQLogCus(@"Custom Log");
-    
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
