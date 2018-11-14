@@ -23,7 +23,6 @@
     WQLogWar(@"Warn Log");
     WQLogMes(@"Mssage Log");
     WQLogOth(@"Other Log");
-    WQLogCus(@"Custom Log");
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
@@ -41,7 +40,6 @@
     WQLogWar(@"Warn Log");
     WQLogMes(@"Mssage Log");
     WQLogOth(@"Other Log");
-    WQLogCus(@"Custom Log");
 }
 
 - (void)dealloc {
@@ -49,10 +47,3 @@
 }
 
 @end
-
-
-
-
-
-
-

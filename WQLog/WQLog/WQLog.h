@@ -8,69 +8,74 @@
 
 #import <UIKit/UIKit.h>
 
-#define XCODE_COLORS_ESCAPE @"\033[" 
-#define XCODE_COLORS_RESET_FG XCODE_COLORS_ESCAPE @"fg;"
+#define WQLogCtrl [WQLog shareInstance]
 
-#define SINGLETONWQLOG [WQLog shareWQLog]
+#define WQLogDef(FORMAT,...) WQLoger(kWQLogDef, (FORMAT), ## __VA_ARGS__)
+#define WQLogInf(FORMAT,...) WQLoger(kWQLogInf, (FORMAT), ## __VA_ARGS__)
+#define WQLogErr(FORMAT,...) WQLoger(kWQLogErr, (FORMAT), ## __VA_ARGS__)
+#define WQLogWar(FORMAT,...) WQLoger(kWQLogWar, (FORMAT), ## __VA_ARGS__)
+#define WQLogMes(FORMAT,...) WQLoger(kWQLogMes, (FORMAT), ## __VA_ARGS__)
+#define WQLogOth(FORMAT,...) WQLoger(kWQLogOth, (FORMAT), ## __VA_ARGS__)
+#define WQLoger(LEVEL, FORMAT,...)   \
+[WQLogCtrl log: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
+level: LEVEL  \
+line: __LINE__   \
+thread: [NSThread currentThread] \
+log: (FORMAT), ## __VA_ARGS__]
 
-/*********************************** 安 装 了 XcodeColors 后 可 以 输 出 带 颜 色 的 日 志 ***********************************/
-#define WQLogDef(FORMAT,...) WQLoger(nil,(FORMAT), ## __VA_ARGS__)
-#define WQLogInf(FORMAT,...) WQLoger(WQColor(32,102,235,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogErr(FORMAT,...) WQLoger(WQColor(255,0,0,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogWar(FORMAT,...) WQLoger(WQColor(213,184,109,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogMes(FORMAT,...) WQLoger(WQColor(127,255,0,1),(FORMAT), ## __VA_ARGS__)
-#define WQLogOth(FORMAT,...) WQLoger(WQColor(186,0,255,1),(FORMAT), ## __VA_ARGS__)
-#define WQLoger(COLOR,FORMAT,...)   \
-    [SINGLETONWQLOG log: COLOR    \
-                   file: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
-                   line: __LINE__   \
-                 thread: [NSThread currentThread] \
-                    log: (FORMAT), ## __VA_ARGS__]
+typedef enum {
+    /** 默认日志，输出到控制台与文件 */
+    kWQLogDef,
+    /** 信息日志，输出到控制台与文件 */
+    kWQLogInf,
+    /** 错误日志，输出到控制台与文件 */
+    kWQLogErr,
+    /** 警告日志，输出到控制台与文件 */
+    kWQLogWar,
+    /** 信息日志2，输出到控制台与文件 */
+    kWQLogMes,
+    /** 自定义日志，发布时不输出到控制台，只输出到日志文件 */
+    kWQLogOth,
+}WQLogLevel;
 
-/** 自定义颜色日志输出 */
-#define WQLogCus(FORMAT,...) \
-    [SINGLETONWQLOG cusLog: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]    \
-                      line: __LINE__    \
-                    thread: [NSThread currentThread]  \
-                       log: (FORMAT), ## __VA_ARGS__]
-
-#define WQColor(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-
+NS_ASSUME_NONNULL_BEGIN
+/**
+ * @class WQLog
+ *
+ * @brief 日志输出
+ * @superclass NSObject
+ * @classdesign 控制日志输出格式，DEBUG 下输出：文件、线程、日志类型、行号、日志内容，Release 下输出：线程、日志类型、行号、日志内容
+ */
 @interface WQLog : NSObject
-@property (nonatomic, strong) UIColor *wqCustomColor;
 /**
- *  将日志输出到本地
+ * 单例
  */
-- (void)recodeLog;
++ (WQLog *)shareInstance;
+
 /**
- *  清除本地日志
+ * 缓存日志
+ *
+ * @param dir 日志缓存目录文件夹，文件夹不存在时会创建文件夹
+ *
+ * @return 日志文件路径
  */
-- (void)clearRecode;
+- (nullable NSString *)recordLogWithDir:(NSString *)dir;
 
-+ (WQLog *)shareWQLog;
-
-
-
+/**
+ * 清除日志
+ *
+ * @param dir 日志缓存目录文件夹
+ * @param deleteBlock 日志文件列表，返回需要删除的文件
+ */
+- (void)clearLogCachesWithDir:(NSString *)dir
+                       delete:(NSArray<NSString *> * _Nullable (^)(NSArray<NSString *> * _Nullable logPaths))deleteBlock;
 
 
 /*********************************** 内 部 调 用 ***********************************/
-- (void)log:(UIColor *)color
-       file:(NSString *)file
+- (void)log:(NSString *)file
+      level:(WQLogLevel)level
        line:(int)line
      thread:(NSThread *)thread
-        log:(NSString *)log,...;
-- (void)cusLog:(NSString *)file
-          line:(int)line
-        thread:(NSThread *)thread
-           log:(NSString *)log,...;
+        log:(nullable NSString *)log,...;
 @end
-
-
-
-
-
-
-
-
-
-
+NS_ASSUME_NONNULL_END
