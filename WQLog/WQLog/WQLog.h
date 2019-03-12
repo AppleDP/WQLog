@@ -18,10 +18,10 @@
 #define WQLogOth(FORMAT,...) WQLoger(kWQLogOth, (FORMAT), ## __VA_ARGS__)
 #define WQLoger(LEVEL, FORMAT,...)   \
 [WQLogCtrl log: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
-level: LEVEL  \
-line: __LINE__   \
-thread: [NSThread currentThread] \
-log: (FORMAT), ## __VA_ARGS__]
+         level: LEVEL  \
+          line: __LINE__   \
+        thread: [NSThread currentThread] \
+           log: (FORMAT), ## __VA_ARGS__]
 
 typedef enum {
     /** 默认日志，输出到控制台与文件 */
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 单例
  */
-+ (WQLog *)shareInstance;
++ (instancetype)shareInstance;
 
 /**
  * 缓存日志

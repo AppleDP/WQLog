@@ -23,6 +23,7 @@
     WQLogWar(@"Warn Log");
     WQLogMes(@"Mssage Log");
     WQLogOth(@"Other Log");
+    
     NSLog(@" ");
     NSLog(@" ");
     NSLog(@" ");
@@ -34,7 +35,7 @@
 }
 
 - (void)childThread {
-    WQLogDef(@"Default Log");
+    WQLogDef(@"Default Log\n");
     WQLogInf(@"Info Log");
     WQLogErr(@"Error Log");
     WQLogWar(@"Warn Log");

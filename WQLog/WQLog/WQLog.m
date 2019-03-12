@@ -30,7 +30,7 @@
 }
 
 static WQLog *instance;
-+ (WQLog *)shareInstance {
++ (instancetype)shareInstance {
     @synchronized(self) {
         if (instance == nil) {
             instance = [[self alloc] init];
@@ -212,7 +212,7 @@ static WQLog *instance;
     NSString *queueName = [NSString stringWithUTF8String:dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL)];
     NSString *threadName = [[NSThread currentThread] isMainThread] ? @"Main" : ([NSThread currentThread].name.length == 0 ? (queueName.length != 0 ? queueName : @"Child") : [NSThread currentThread].name);
     NSString *log = @"";
-    log = [NSString stringWithFormat:@"%@ 文件: %@ --- 线程: %@ --- 类型: %@ --- WQdioSDK[%d]: %@ %@",
+    log = [NSString stringWithFormat:@"%@ 文件: %@ --- 线程: %@ --- 类型: %@[%d]: %@ %@",
            headerStr,
            file,
            threadName,
@@ -240,8 +240,8 @@ void uncaughtExceptionHandler(NSException *exception) {
         if (mainMessage == nil) {
             mainMessage = @"崩溃方法定位失败,请您查看函数调用栈来查找crash原因";
         }
-        NSString *crashName =     [NSString stringWithFormat:@"\t\t    [Crash Type]: %@",exception.name];
-        NSString *crashReason =   [NSString stringWithFormat:@"\t\t  [Crash Reason]: %@",exception.reason];
+        NSString *crashName = [NSString stringWithFormat:@"\t\t        [Crash Type]: %@",exception.name];
+        NSString *crashReason = [NSString stringWithFormat:@"\t\t    [Crash Reason]: %@",exception.reason];
         NSString *crashLocation = [NSString stringWithFormat:@"\t\t[Crash Location]: %@",mainMessage];
         NSMutableString *recordLog = [NSMutableString stringWithFormat:@"\n------------------ Crash Information Start ------------------\n%@\n%@\n%@\n函数堆栈:\n%@\n------------------ Crash Information Finish ------------------\n\n",crashName,crashReason,crashLocation,callStackSymbolsArr];
         [WQLogCtrl recordLog:recordLog];
@@ -297,6 +297,3 @@ NSString* getMainCallStackSymbolMessageWithCallStackSymbolString(NSArray<NSStrin
     }
 }
 @end
-
-
-
