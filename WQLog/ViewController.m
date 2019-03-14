@@ -17,16 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WQLogDef(@"Default Log");
-    WQLogInf(@"Info Log");
-    WQLogErr(@"Error Log");
-    WQLogWar(@"Warn Log");
-    WQLogMes(@"Mssage Log");
-    WQLogOth(@"Other Log");
+    WQLogDef(@"Def Log");
+    WQLogInf(@"Inf Log");
+    WQLogErr(@"Err Log");
+    WQLogWar(@"War Log");
+    WQLogMes(@"Msg Log");
+    WQLogOth(@"Oth Log");
     
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" ");
     NSThread *thread = [[NSThread alloc] initWithTarget:self
                                                selector:@selector(childThread)
                                                  object:nil];
@@ -35,16 +32,11 @@
 }
 
 - (void)childThread {
-    WQLogDef(@"Default Log\n");
-    WQLogInf(@"Info Log");
-    WQLogErr(@"Error Log");
-    WQLogWar(@"Warn Log");
-    WQLogMes(@"Mssage Log");
-    WQLogOth(@"Other Log");
+    WQLogDef(@"Def Log");
+    WQLogInf(@"Inf Log");
+    WQLogErr(@"Err Log");
+    WQLogWar(@"War Log");
+    WQLogMes(@"Msg Log");
+    WQLogOth(@"Oth Log");
 }
-
-- (void)dealloc {
-    NSLog(@"dealloc");
-}
-
 @end
