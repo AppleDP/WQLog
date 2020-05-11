@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-#define WQLogCtrl [WQLog shareInstance]
-
+/** 默认日志，输出到控制台与文件 */
 #define WQLogDef(FORMAT,...) WQLoger(kWQLogDef, (FORMAT), ## __VA_ARGS__)
+/** 信息日志，输出到控制台与文件 */
 #define WQLogInf(FORMAT,...) WQLoger(kWQLogInf, (FORMAT), ## __VA_ARGS__)
+/** 错误日志，输出到控制台与文件 */
 #define WQLogErr(FORMAT,...) WQLoger(kWQLogErr, (FORMAT), ## __VA_ARGS__)
+/** 警告日志，输出到控制台与文件 */
 #define WQLogWar(FORMAT,...) WQLoger(kWQLogWar, (FORMAT), ## __VA_ARGS__)
+/** 信息日志2，输出到控制台与文件 */
 #define WQLogMes(FORMAT,...) WQLoger(kWQLogMes, (FORMAT), ## __VA_ARGS__)
+/** 自定义日志，Release 时不输出到控制台，只输出到日志文件 */
 #define WQLogOth(FORMAT,...) WQLoger(kWQLogOth, (FORMAT), ## __VA_ARGS__)
+
+#define WQLogCtrl [WQLog shareInstance]
 #define WQLoger(LEVEL, FORMAT,...)   \
 [WQLogCtrl log: [[NSString stringWithUTF8String:__FILE__] lastPathComponent]   \
          level: LEVEL  \
@@ -24,19 +30,13 @@
            log: (FORMAT), ## __VA_ARGS__]
 
 typedef enum {
-    /** 默认日志，输出到控制台与文件 */
     kWQLogDef,
-    /** 信息日志，输出到控制台与文件 */
     kWQLogInf,
-    /** 错误日志，输出到控制台与文件 */
     kWQLogErr,
-    /** 警告日志，输出到控制台与文件 */
     kWQLogWar,
-    /** 信息日志2，输出到控制台与文件 */
     kWQLogMes,
-    /** 自定义日志，发布时不输出到控制台，只输出到日志文件 */
     kWQLogOth,
-}WQLogLevel;
+}WQLogLevel; // 日志类型
 
 NS_ASSUME_NONNULL_BEGIN
 /**
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @brief 日志输出
  * @superclass NSObject
- * @classdesign 控制日志输出格式，DEBUG 下输出：文件、线程、日志类型、行号、日志内容，Release 下输出：线程、日志类型、行号、日志内容
+ * @classdesign 控制日志输出格式，DEBUG 下输出：文件、线程、日志类型、行号、日志内容，Release 下输出：线程、日志类型、日志内容
  */
 @interface WQLog : NSObject
 /**
