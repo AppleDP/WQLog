@@ -44,14 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @brief 日志输出
  * @superclass NSObject
- * @classdesign 控制日志输出格式，DEBUG 下输出：文件、线程、日志类型、行号、日志内容，Release 下输出：线程、日志类型、日志内容
+ * @classdesign 控制日志输出格式，DEBUG 下输出：文件、线程、日志类型、行号、日志内容，Release 下输出：线程、日志类型、行号、日志内容
  */
 @interface WQLog : NSObject
-/**
- * 单例
- */
-+ (instancetype)shareInstance;
-
 /**
  * 缓存日志
  *
@@ -72,6 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*********************************** 内 部 调 用 ***********************************/
+/**
+ * 单例
+ */
++ (instancetype)shareInstance;
+
+/**
+ * 日志打印函数
+ */
 - (void)log:(NSString *)file
       level:(WQLogLevel)level
        line:(int)line

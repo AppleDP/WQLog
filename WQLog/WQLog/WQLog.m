@@ -99,6 +99,7 @@ static char* s_fatal_signal_names[] = {
 };
 static int s_fatal_signal_num = sizeof(s_fatal_signals) / sizeof(s_fatal_signals[0]);
 NSString * const UncaughtExceptionHandlerSignalExceptionName = @"UncaughtExceptionHandlerSignalExceptionName";
+NSString * const UncaughtExceptionHandlerSignalName = @"UncaughtExceptionHandlerSignalName";
 
 @interface WQLog ()
 /** 记录日志标识 */
@@ -143,7 +144,7 @@ static WQLog *instance;
 }
 
 - (NSString *)recordLogWithDir:(NSString *)dir {
-    @synchronized (self.logFile) {
+    @synchronized(self) {
         if (self.isRecordLog) {
 #ifdef DEBUG
             WQLogInf(@"已经开启日志记录");
@@ -192,7 +193,7 @@ static WQLog *instance;
 
 - (void)clearLogCachesWithDir:(NSString *)dir
                        delete:(NSArray<NSString *> * _Nullable (^)(NSArray<NSString *> * _Nullable logPaths))deleteBlock {
-    @synchronized (self.logFile) {
+    @synchronized(self) {
         // 获取文件夹下所有文件
         NSError *error;
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -319,10 +320,11 @@ static WQLog *instance;
            footerStr];
     NSLog(@"%@",log);
 #else
-    log = [NSString stringWithFormat:@"%@ 线程: %@ --- %@: %@ %@",
+    log = [NSString stringWithFormat:@"%@ 线程: %@ --- %@[%d]: %@ %@",
            headerStr,
            threadName,
            levelStr,
+           line,
            msg,
            footerStr];
     if (level != kWQLogOth) {
@@ -331,14 +333,13 @@ static WQLog *instance;
 #endif
     if (self.isRecordLog) {
         __weak typeof(self) wself = self;
-        NSString *recordLog = [NSString stringWithFormat:@"%@ 文件: %@ --- 线程: %@ --- 类型: %@[%d]: %@ %@",
-                               headerStr,
-                               file,
-                               threadName,
-                               levelStr,
-                               line,
-                               msg,
-                               footerStr];
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        formater.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
+        NSString *date = [formater stringFromDate:[NSDate date]];
+        NSMutableString *recordLog = [[NSMutableString alloc] initWithString:date];
+        [recordLog appendString:@" "];
+        [recordLog appendFormat:@"%@ 文件: %@ --- 线程: %@ --- 类型: %@[%d]: %@ %@",headerStr,file,threadName,levelStr,line,msg,footerStr];
+        [recordLog appendString:@"\n"];
         dispatch_async(self.writeQueue, ^{
             __strong typeof(wself) sself = wself;
             [sself recordLog:recordLog];
@@ -348,38 +349,19 @@ static WQLog *instance;
 
 void wq_singleCrashHandle(int signal) {
     // 捕获信号崩溃信息
-    if (WQLogCtrl.isRecordLog) {
-        NSArray<NSString *> *callStack = wq_backtrace();
-        NSString *description = [NSString stringWithFormat:@"Signal %d was raised!",signal];
-        NSString *signalName = [NSString stringWithFormat:@"%d",signal];
-        for (int i = 0; i < s_fatal_signal_num; ++i) {
-            if (s_fatal_signals[i] == signal) {
-                description = [NSString stringWithFormat:@"Signal %s was raised!",s_fatal_signal_names[i]];
-                signalName = [NSString stringWithFormat:@"%s(%d)",s_fatal_signal_names[i],signal];
-                break;
-            }
+    NSArray<NSString *> *callStack = wq_backtrace();
+    NSString *description = [NSString stringWithFormat:@"Signal %d was raised!",signal];
+    NSString *signalName = [NSString stringWithFormat:@"%d",signal];
+    for (int i = 0; i < s_fatal_signal_num; ++i) {
+        if (s_fatal_signals[i] == signal) {
+            description = [NSString stringWithFormat:@"Signal %s was raised!",s_fatal_signal_names[i]];
+            signalName = [NSString stringWithFormat:@"%s(%d)",s_fatal_signal_names[i],signal];
+            break;
         }
-        //获取在哪个类的哪个方法中实例化的数组
-        NSString *location = wq_getMainCallStackSymbolMessageWithCallStackSymbolString(callStack);
-        if (location == nil) {
-            location = @"崩溃方法定位失败,请您查看函数调用栈来查找crash原因";
-        }
-        // 崩溃信息
-        NSMutableString *recordLog = [[NSMutableString alloc] init];
-        [recordLog appendFormat:@"\n------------------ Crash Information Start ------------------\n"];
-        [recordLog appendFormat:@"应用信息: %@ %@(%@)\n",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-        [recordLog appendFormat:@"设备类型: %@\n",[UIDevice currentDevice].model];
-        [recordLog appendFormat:@"系统版本: %@ %@\n",[UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
-        [recordLog appendFormat:@"崩溃类型: %@\n",UncaughtExceptionHandlerSignalExceptionName];
-        [recordLog appendFormat:@"崩溃信号: %@\n",signalName];
-        [recordLog appendFormat:@"崩溃原因: %@\n",description];
-        [recordLog appendFormat:@"崩溃定位: %@\n",location];
-        [recordLog appendFormat:@"函数堆栈: \n%@\n",callStack];
-        [recordLog appendFormat:@"------------------- Crash Information End -------------------\n\n"];
-        
-        // 主线程写日志
-        [WQLogCtrl performSelectorOnMainThread:@selector(recordLog:) withObject:recordLog waitUntilDone:YES];
     }
+    wq_recordLogCrash([NSException exceptionWithName:UncaughtExceptionHandlerSignalExceptionName
+                                              reason:description
+                                            userInfo:@{UncaughtExceptionHandlerSignalName : signalName}], callStack);
 }
 
 NSArray<NSString *>* wq_backtrace() {
@@ -394,7 +376,7 @@ NSArray<NSString *>* wq_backtrace() {
     // 返回一个指向字符串数组的指针
     // 每个字符串包含了一个相对于callstack中对应元素的可打印信息，包括函数名、偏移地址、实际返回地址
     char **strs = backtrace_symbols(callstack, frames);
-    NSMutableArray *backtrace = [NSMutableArray arrayWithCapacity:frames];
+    NSMutableArray<NSString *> *backtrace = [NSMutableArray arrayWithCapacity:frames];
     for (int i = 0; i < frames; i++) {
         [backtrace addObject:[NSString stringWithUTF8String:strs[i]]];
     }
@@ -403,30 +385,9 @@ NSArray<NSString *>* wq_backtrace() {
 }
 
 void wq_uncaughtExceptionHandler(NSException *exception) {
-    if (WQLogCtrl.isRecordLog) {
-        // 堆栈数据
-        NSArray<NSString *> *callStackSymbolsArr = [exception callStackSymbols];
-        
-        //获取在哪个类的哪个方法中实例化的数组
-        NSString *location = wq_getMainCallStackSymbolMessageWithCallStackSymbolString(callStackSymbolsArr);
-        if (location == nil) {
-            location = @"崩溃方法定位失败,请您查看函数调用栈来查找crash原因";
-        }
-        // 崩溃信息
-        NSMutableString *recordLog = [[NSMutableString alloc] init];
-        [recordLog appendFormat:@"\n------------------ Crash Information Start ------------------\n"];
-        [recordLog appendFormat:@"应用信息: %@ %@(%@)\n",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-        [recordLog appendFormat:@"设备类型: %@\n",[UIDevice currentDevice].model];
-        [recordLog appendFormat:@"系统版本: %@ %@\n",[UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
-        [recordLog appendFormat:@"崩溃类型: %@\n",exception.name];
-        [recordLog appendFormat:@"崩溃原因: %@\n",exception.reason];
-        [recordLog appendFormat:@"崩溃定位: %@\n",location];
-        [recordLog appendFormat:@"函数堆栈: \n%@\n",callStackSymbolsArr];
-        [recordLog appendFormat:@"------------------ Crash Information Finish ------------------\n\n"];
-        
-        // 主线程写日志
-        [WQLogCtrl performSelectorOnMainThread:@selector(recordLog:) withObject:recordLog waitUntilDone:YES];
-    }
+    // 堆栈数据
+    NSArray<NSString *> *callStackSymbolsArr = [exception callStackSymbols];
+    wq_recordLogCrash(exception, callStackSymbolsArr);
 }
 
 NSString* wq_getMainCallStackSymbolMessageWithCallStackSymbolString(NSArray<NSString *> *callStackSymbolsArr) {
@@ -456,24 +417,47 @@ NSString* wq_getMainCallStackSymbolMessageWithCallStackSymbolString(NSArray<NSSt
     return mainCallStackSymbolMsg;
 }
 
-- (void)recordLog:(NSString *)log {
-    // 记录日志
-    @autoreleasepool {
-        // 添加日期
+void wq_recordLogCrash(NSException *exception, NSArray<NSString *> *callStacks) {
+    if (WQLogCtrl.isRecordLog) {
+        // 崩溃位置定位
+        NSString *location = wq_getMainCallStackSymbolMessageWithCallStackSymbolString(callStacks);
+        if (!location.length) {
+            location = @"崩溃方法定位失败,请您查看函数调用栈来查找crash原因";
+        }
+        // 崩溃时间
         NSDateFormatter *formater = [[NSDateFormatter alloc] init];
         formater.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
         NSString *date = [formater stringFromDate:[NSDate date]];
-        NSMutableString *recordLog = [[NSMutableString alloc] initWithString:date];
+        NSMutableString *recordLog = [[NSMutableString alloc] init];
         
-        // 添加日志
-        [recordLog appendString:@" "];
-        [recordLog appendString:log];
+        // 应用信息
+        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
         
-        // 添加换行
-        [recordLog appendString:@"\n"];
+        // 崩溃信息
+        [recordLog appendFormat:@"\n------------------ Crash Information Start ------------------\n"];
+        [recordLog appendFormat:@"崩溃时间: %@\n",date];
+        [recordLog appendFormat:@"应用信息: %@ %@(%@)\n",appName, version, build];
+        [recordLog appendFormat:@"设备型号: %@\n",[UIDevice currentDevice].model];
+        [recordLog appendFormat:@"系统版本: %@ %@\n",[UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
+        [recordLog appendFormat:@"崩溃类型: %@\n",exception.name];
+        [recordLog appendFormat:@"崩溃原因: %@\n",exception.reason];
+        [recordLog appendFormat:@"额外信息: %@\n",exception.userInfo];
+        [recordLog appendFormat:@"崩溃定位: %@\n",location];
+        [recordLog appendFormat:@"函数堆栈: \n%@\n",callStacks];
+        [recordLog appendFormat:@"------------------- Crash Information End -------------------\n\n"];
         
+        // 主线程记录日志
+        [WQLogCtrl performSelectorOnMainThread:@selector(recordLog:) withObject:recordLog waitUntilDone:YES];
+    }
+}
+
+- (void)recordLog:(NSString *)log {
+    // 记录日志
+    @autoreleasepool {
         // 写入文件
-        NSData *recordD = [recordLog dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *recordD = [log dataUsingEncoding:NSUTF8StringEncoding];
         [self.stream write:recordD.bytes maxLength:recordD.length];
     }
 }
